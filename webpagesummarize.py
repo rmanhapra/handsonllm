@@ -49,6 +49,15 @@ def summarize_website(website):
         messages=messages
     )
     return response.choices[0].message.content
+
+def summarize_website_ollama(website):
+    openai = OpenAI(base_url="http://localhost:11434/v1",api_key="ollama")
+    messages = messages_for(fetch_website_contents(website))
+    response = openai.chat.completions.create(
+        model="gemma3:270m",
+        messages=messages
+    )
+    return response.choices[0].message.content
  
 
 
